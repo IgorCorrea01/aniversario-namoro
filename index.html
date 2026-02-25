@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz 2 Meses, Meu Amor ❤️</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta name="theme-color" content="#ff2e63">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    overflow-x: hidden; /* bloqueia só lateral */
+}
+
+body {
+    min-height: 100dvh;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 12vh;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Fundo real */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: cinematicZoom 20s ease-in-out infinite alternate;
+    z-index: -2;
+}
+
+/* Overlay elegante */
+body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.35)
+    );
+    z-index: -1;
+}
+
+@keyframes cinematicZoom {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.08);
+    }
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.heart {
+    margin-top: 20px;
+    font-size: 135px;
+    cursor: pointer;
+    animation: pulse 1.6s infinite ease-in-out;
+    color: #ff2e63;
+    text-shadow: 0 0 30px rgba(255, 46, 99, 0.9);
+    transition: transform 0.3s ease;
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+    position: relative;
+    z-index: 5;
+}
+
+.heart.grow {
+  transform: scale(1.15);
+}
+.heart:active {
+    transform: scale(0.9);
+    filter: brightness(1.2);
+}
+.main-wrapper {
+  overflow-x: hidden;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 20px;
+    max-width: 500px;
+    display: none;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.frase-inicial {
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    padding: 0 25px;
+    animation: fadeIn 2s ease forwards;
+}
+
+.small-heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 3s linear forwards;
+}
+
+@keyframes float {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-250px); }
+}
+
+.floating-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #d4002a;
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(255, 46, 99, 0.5);
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 1000;
+}
+
+.floating-btn:hover {
+    transform: scale(1.1) rotate(-10deg);
+}
+
+.exploding-heart {
+    position: fixed; /* antes estava absolute */
+    font-size: 24px;
+    animation: explode 1s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) scale(1.8);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .heart {
+        font-size: 110px;
+    }
+
+    .message {
+        font-size: 18px;
+        padding: 0 20px;
+    }
+}
+
+.envelope {
+    margin-top: 18px;
+    font-size: 42px;
+    cursor: pointer;
+    display: none;
+    transition: 0.3s ease;
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.5));
+}
+
+.envelope:hover {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s ease;
+    z-index: 9999;
+}
+
+.popup.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popup-content {
+    width: 92%;
+    max-width: 360px;
+    background: #fffdf7;
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    animation: abrirCartaMobile 0.5s ease forwards;
+    position: relative;
+}
+
+@keyframes abrirCartaMobile {
+    from {
+        transform: translateY(40px) scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.popup-content h3 {
+    margin-top: 5px;
+    color: #ff2e63;
+}
+
+.popup-content p {
+    color: #444;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+@keyframes openLetter {
+    0% {
+        transform: scale(0.6) translateY(40px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes popupAnim {
+    from { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+    to { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.close {
+    position: absolute;
+    right: 18px;
+    top: 15px;
+    font-size: 24px;
+    color: #d4002a;
+    font-weight: bold;
+}
+
+.close:hover {
+    transform: scale(1.2);
+}
+
+.bloco-contador {
+    margin-top: 30px;
+    text-align: center;
+    animation: fadeIn 2s ease forwards;
+}
+
+.bloco-contador h3 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.tempo {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 46, 99, 0.7);
+}
+
+#tituloPrincipal {
+    transition: 0.5s ease;
+}
+
+.animarTitulo {
+    transform: scale(1.1);
+    letter-spacing: 2px;
+}
+
+.music-section {
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+.music-section h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.music-section p {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+.music-section audio {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 20px;
+}
+
+body > *:not(.popup):not(.floating-btn) {
+    position: relative;
+    z-index: 2;
+}
+</style>
+</head>
+<div class="popup" id="popupCarta">
+    <div class="popup-content">
+        <span class="close" onclick="fecharCarta()">✖</span>
+        <h3>2 Meses de nós 💌</h3>
+        <p>
+            Desde que você chegou, eu comecei a enxergar mais luzes no céu, mais brilho nas ruas, mais cor no mundo.
+            É como se tudo tivesse ficado mais bonito, ou sei lá, talvez eu só tenha começado a enxergar a vida com mais carinho depois de você.
+
+            O seu sorriso ilumina o meu amanhecer.
+            O seu olhar me dá paz e força pra enfrentar qualquer dia.
+            E o seu beijo… é simplesmente hipnotizante.
+
+            Estar com você é engraçado e mágico ao mesmo tempo.
+            Parece que o tempo acelera, porque quando eu vejo, as horas já passaram…
+            mas ao mesmo tempo, quando estou ao seu lado, é como se o mundo inteiro diminuísse a velocidade só pra gente aproveitar cada segundo.
+
+            Eu te amo.
+            E a cada dia eu sou mais feliz por ter você.
+
+            Hoje eu tenho ainda mais certeza de que fiz a escolha certa naquele momento em que me ajoelhei e te entreguei, junto com a aliança, o meu coração.
+
+            Você é a minha melhor escolha.
+            E eu escolheria você de novo, todas as vezes.
+
+            Te amo. ❤️
+        </p>
+    </div>
+</div>
+
+<body>
+
+<h2 id="tituloPrincipal">
+    Toque no coração<br>
+    e sinta o que eu sinto ❤️
+</h2>
+
+<div class="heart" onclick="ativarAmor()">❤️</div>
+
+<div class="message" id="mensagem">
+    Dois meses de leveza, de cuidado,
+    de descobrir que amar pode ser simples.
+    Você transformou meus dias em algo muito mais bonito do que eu imaginava viver.
+    <br></br>
+    Preparei uma mensagem…
+    clica ali embaixo 💌
+</div>
+<div class="bloco-contador">
+    <h3>Juntos há</h3>
+    <div class="tempo" id="contador"></div>
+    <h3>e contando...</h3>
+</div>
+
+<div class="floating-btn" onclick="mostrarCarta()">💌</div>
+
+<div class="music-section">
+  <h3>Nossa Música 🎵</h3>
+  <p>Dá o play e lembra da gente 💖</p>
+
+  <audio controls>
+    <source src="musica.mp3" type="audio/mpeg" />
+    Seu navegador não suporta áudio.
+  </audio>
+</div>
+
+<script>
+if (navigator.vibrate) {
+    navigator.vibrate(50);
+}
+
+function ativarAmor() {
+    const titulo = document.getElementById("tituloPrincipal");
+    titulo.innerHTML = "Feliz 2 Meses! ❤️";
+    titulo.classList.add("animarTitulo");
+    const heartElement = document.querySelector(".heart");
+    const rect = heartElement.getBoundingClientRect();
+
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    document.getElementById("mensagem").style.display = "block";
+    document.querySelector(".floating-btn").style.display = "flex";
+
+    for (let i = 0; i < 28; i++) {
+        let heart = document.createElement("div");
+        heart.className = "exploding-heart";
+        heart.innerHTML = "❤️";
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = 200 + Math.random() * 150;
+
+        const x = Math.cos(angle) * distance + "px";
+        const y = Math.sin(angle) * distance + "px";
+
+        heart.style.setProperty("--x", x);
+        heart.style.setProperty("--y", y);
+
+        heart.style.position = "fixed";
+        heart.style.left = centerX + "px";
+        heart.style.top = centerY + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 1000);
+    }
+}
+
+function mostrarCarta() {
+    document.getElementById("popupCarta").classList.add("active");
+}
+
+function fecharCarta() {
+    document.getElementById("popupCarta").classList.remove("active");
+}
+
+const dataInicio = new Date("2025-09-20 12:00:00"); // MUDE A DATA AQUI
+
+function atualizarContador() {
+    const agora = new Date();
+    const diferenca = agora - dataInicio;
+
+    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+    const segundos = Math.floor((diferenca / 1000) % 60);
+
+    document.getElementById("contador").innerHTML =
+        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+}
+
+setInterval(atualizarContador, 1000);
+atualizarContador();
+</script>
+
+</body>
+</html>
